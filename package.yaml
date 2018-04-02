@@ -21,11 +21,11 @@ description:         Please see the README on Github at <https://github.com/bouz
 
 dependencies:
 - base >= 4.7 && < 5
+- amazonka
+- amazonka-s3
 
 library:
   source-dirs: src
-  dependencies:
-  - aws
 
 executables:
   hs3-exe:
