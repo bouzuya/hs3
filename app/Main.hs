@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Main
   ( main
@@ -5,6 +6,7 @@ module Main
 where
 
 import           Lib                (someFunc)
+import           Prelude            (IO, putStrLn, ($), (++))
 import           System.Environment (getEnv)
 
 main :: IO ()
