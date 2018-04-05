@@ -24,6 +24,7 @@ dependencies:
 - amazonka
 - amazonka-s3
 - text
+- lens
 
 library:
   source-dirs: src

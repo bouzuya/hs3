@@ -4,7 +4,7 @@ module Main
   ( main
   )
 where
-
+import           Control.Lens       ((^.))
 import           Data.Either        (Either (Left, Right))
 import           Data.Text          (Text, pack, unpack)
 import           Network.AWS        (AccessKey, Credentials (FromKeys),
@@ -12,9 +12,10 @@ import           Network.AWS        (AccessKey, Credentials (FromKeys),
                                      runResourceT, send, within)
 import           Network.AWS.Data   (fromText)
 import           Network.AWS.S3     (BucketName (BucketName),
-                                     ObjectKey (ObjectKey), getObject)
+                                     ObjectKey (ObjectKey), getObject,
+                                     gorsContentType, gorsResponseStatus)
 import           Prelude            (IO, String, error, print, pure, putStrLn,
-                                     ($), (++), (.), (<$>))
+                                     ($), (++), (<$>))
 import           System.Environment (getEnv)
 
 fromKeys' :: Text -> Text -> Either String Credentials
@@ -37,5 +38,6 @@ main = do
     (Left _)            -> error "invalid credentials"
     (Right credentials) -> newEnv credentials
   let request = getObject bucketName objectKey
-  response <- runResourceT . runAWS env $ within Tokyo $ send request
-  print response
+  response <- runResourceT $ runAWS env $ within Tokyo $ send request
+  print $ response ^. gorsResponseStatus
+  print $ response ^. gorsContentType
