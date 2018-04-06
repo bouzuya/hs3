@@ -20,11 +20,13 @@ extra-source-files:
 description:         Please see the README on Github at <https://github.com/bouzuya/hs3#readme>
 
 dependencies:
-- base >= 4.7 && < 5
 - amazonka
 - amazonka-s3
-- text
+- base >= 4.7 && < 5
+- bytestring
+- conduit-extra
 - lens
+- text
 
 library:
   source-dirs: src
